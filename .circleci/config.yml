@@ -72,7 +72,7 @@ jobs:
       - run:
           name: Push to appcenter
           command: appcenter distribute release --debug --app Speechify/Speechify-Dev  \
-            --file app/build/outputs/apk/development/release/app-development-release.apk \
+            --file app/build/outputs/apk/release/app-release.apk \
             --group "Testers"
       - *store_artifacts
 
