@@ -82,7 +82,7 @@ jobs:
           path: *workspace
       - attach_workspace:
           at: *workspace
-      - *git_commit_message
+#      - *git_commit_message
       - *login_appcenter
       - run:
           name: Detect version type, Change version and Publish
