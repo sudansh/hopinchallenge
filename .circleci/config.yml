@@ -11,7 +11,6 @@ references:
     docker:
       - image: circleci/android:api-30-node
     environment:
-      GIT_COMMIT_DESC: git log --format=oneline -n 1 $CIRCLE_SHA1
       TERM: dumb
       GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError" -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false -Dorg.gradle.daemon=false'
   ## Cache
@@ -60,8 +59,9 @@ jobs:
       - checkout:
           path: *workspace
       - run:
-          name: git message
+          name: Detect version type, Change version and Publish
           command: |
+            GIT_COMMIT_DESC="$(git log --format=oneline -n 1 $CIRCLE_SHA1)"
             echo $GIT_COMMIT_DESC
       - *save_secrets
       - *restore_gradle_cache
