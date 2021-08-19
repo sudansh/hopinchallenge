@@ -6,7 +6,7 @@ orbs:
 references:
   ## Workspace
   workspace: &workspace
-               ~/
+               ~/code
 
   ## Docker image configuration
   android_config: &android_config
