@@ -58,6 +58,7 @@ references:
       command: |
         GIT_COMMIT_DESC=$(git log --format=%B -n 1 "$CIRCLE_SHA1")
         echo $GIT_COMMIT_DESC
+
 jobs:
   build:
     <<: *android_config
@@ -74,6 +75,13 @@ jobs:
           command: |
             ./gradlew clean assembleRelease
 
+      - *store_artifacts
+  push_to_appcenter:
+    <<: *android_config
+    name: Publish to AppCenter
+    steps:
+      - attach_workspace:
+          at: *workspace
       - *login_appcenter
       - run:
           name: Push to appcenter
@@ -81,10 +89,14 @@ jobs:
           --debug --app sud_test/hopin
           --file app/build/outputs/apk/release/app-release.apk
           --group "Testers"
-      - *store_artifacts
-
 
 workflows:
   build:
     jobs:
       - build
+      - push_to_appcenter
+  push_to_appcenter:
+    jobs:
+      - push_to_appcenter:
+          requires:
+            - build
