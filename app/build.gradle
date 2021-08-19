@@ -5,6 +5,19 @@ plugins {
     id "androidx.navigation.safeargs.kotlin"
 }
 
+Properties properties = new Properties()
+File secrets = file("../secrets.properties")
+if (secrets.exists()) {
+    properties.load(new FileReader(secrets))
+}
+signingConfigs {
+    release {
+        storeFile file("sample")
+        storePassword "sample"
+        keyAlias "sample"
+        keyPassword "sample"
+    }
+}
 android {
     compileSdkVersion 30
     defaultConfig {
@@ -20,6 +33,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
