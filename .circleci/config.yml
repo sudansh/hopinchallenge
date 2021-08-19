@@ -65,7 +65,6 @@ jobs:
     steps:
       - checkout:
           path: *workspace
-      - *git_commit_message
       - *save_secrets
       - *restore_gradle_cache
       - *android_dependencies
@@ -78,25 +77,22 @@ jobs:
       - *store_artifacts
   push_to_appcenter:
     <<: *android_config
-    name: Publish to AppCenter
     steps:
       - attach_workspace:
           at: *workspace
+      - *git_commit_message
       - *login_appcenter
       - run:
           name: Push to appcenter
           command: appcenter distribute release release-notes $GIT_COMMIT_DESC
-          --debug --app sud_test/hopin
-          --file app/build/outputs/apk/release/app-release.apk
-          --group "Testers"
+            --app sud_test/hopin
+            --file app/build/outputs/apk/release/app-release.apk
+            --group "Testers"
 
 workflows:
-  build:
+  build-app:
     jobs:
       - build
-      - push_to_appcenter
-  push_to_appcenter:
-    jobs:
       - push_to_appcenter:
           requires:
             - build
