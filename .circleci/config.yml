@@ -93,7 +93,7 @@ jobs:
           name: Push to appcenter
           command: |
             GIT_COMMIT_DESC=$(git log --format=%B -n 1 "$CIRCLE_SHA1")
-            appcenter distribute release release-notes "\"${GIT_COMMIT_DESC}\"" --app sud_test/hopin --file app/build/outputs/apk/release/app-release.apk --group "Testers"
+            appcenter distribute release --release-notes "\"${GIT_COMMIT_DESC}\"" --app sud_test/hopin --file app/build/outputs/apk/release/app-release.apk --group "Testers"
 
 workflows:
   build-app:
