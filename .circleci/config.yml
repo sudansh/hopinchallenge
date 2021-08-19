@@ -65,16 +65,6 @@ jobs:
     steps:
       - checkout:
           path: *workspace
-      - *login_appcenter
-      - run:
-          name: Push to appcenter
-          command: |
-            echo "{'hash':'${CIRCLE_SHA1}'}"
-            echo '"${CIRCLE_SHA1}"'
-            echo "\"${CIRCLE_SHA1}\""
-            GIT_COMMIT_DESC=$(git log --format=%B -n 1 "$CIRCLE_SHA1")
-            echo "this is \"h gg \""
-                  appcenter distribute release release-notes '${$GIT_COMMIT_DESC}' --app sud_test/hopin --file app/build/outputs/apk/release/app-release.apk --group "Testers"
       - *save_secrets
       - *restore_gradle_cache
       - *android_dependencies
@@ -103,7 +93,7 @@ jobs:
           name: Push to appcenter
           command: |
             GIT_COMMIT_DESC=$(git log --format=%B -n 1 "$CIRCLE_SHA1")
-            appcenter distribute release release-notes "${$GIT_COMMIT_DESC}' --app sud_test/hopin --file app/build/outputs/apk/release/app-release.apk --group "Testers"
+            appcenter distribute release release-notes "\"${GIT_COMMIT_DESC}\"" --app sud_test/hopin --file app/build/outputs/apk/release/app-release.apk --group "Testers"
 
 workflows:
   build-app:
