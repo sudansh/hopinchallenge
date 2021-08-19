@@ -14,7 +14,7 @@ if (secrets.exists()) {
 android {
     signingConfigs {
         release {
-            storeFile file("sample")
+            storeFile file("../sample")
             storePassword "sample"
             keyAlias "sample"
             keyPassword "sample"
