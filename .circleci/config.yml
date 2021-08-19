@@ -60,6 +60,9 @@ references:
         echo 'export GIT_COMMIT_DESC="$GIT_COMMIT_DESC"' >> $BASH_ENV
 
 
+  checkout: &checkout
+    checkout:
+      path: *workspace
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace
@@ -73,8 +76,7 @@ jobs:
   build:
     <<: *android_config
     steps:
-      - checkout:
-          path: *workspace
+      - *checkout
       - *save_secrets
       - *restore_gradle_cache
       - *android_dependencies
@@ -89,8 +91,7 @@ jobs:
   push_to_appcenter:
     <<: *android_config
     steps:
-      - checkout:
-          path: *workspace
+      - *checkout
       - *attach_workspace
       - *login_appcenter
       - run:
