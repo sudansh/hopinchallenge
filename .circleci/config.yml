@@ -75,7 +75,7 @@ jobs:
       - *login_appcenter
       - run:
           name: Push to appcenter
-          command: appcenter distribute release release-notes "sdf" --debug --app sud_test/hopin --file app/build/outputs/apk/release/app-release.apk --group "Testers"
+          command: appcenter distribute release release-notes $$GIT_COMMIT_DESC --debug --app sud_test/hopin --file app/build/outputs/apk/release/app-release.apk --group "Testers"
       - *store_artifacts
 
 
