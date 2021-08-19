@@ -58,9 +58,17 @@ references:
       command: |
         GIT_COMMIT_DESC=$(git log --format=%B -n 1 "$CIRCLE_SHA1")
         echo 'export GIT_COMMIT_DESC="$GIT_COMMIT_DESC"' >> $BASH_ENV
+
+
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace
+
+  persist_workspace: &persist_workspace
+    persist_to_workspace:
+      root: *workspace
+      paths:
+        - app/build/outputs/apk
 jobs:
   build:
     <<: *android_config
@@ -72,14 +80,11 @@ jobs:
       - *android_dependencies
       - *save_gradle_cache
       - run:
-          name: Build for proper environment
+          name: Build Develop
           command: |
             ./gradlew clean assembleRelease
       - *store_artifacts
-      - persist_to_workspace:
-          root: *workspace
-          paths:
-            - app/build/outputs/apk
+      - *persist_workspace
 
   push_to_appcenter:
     <<: *android_config
