@@ -59,6 +59,10 @@ jobs:
     steps:
       - checkout:
           path: *workspace
+      - run:
+          name: Save secrets from env to file
+          command: |
+            echo $GIT_COMMIT_DESC
       - *save_secrets
       - *restore_gradle_cache
       - *android_dependencies
@@ -71,9 +75,7 @@ jobs:
       - *login_appcenter
       - run:
           name: Push to appcenter
-          command: appcenter distribute release --debug --app Speechify/Speechify-Dev
-            --file app/build/outputs/apk/release/app-release.apk
-            --group "Testers"
+          command: appcenter distribute release release-notes "sdf" --debug --app sud_test/hopin --file app/build/outputs/apk/release/app-release.apk --group "Testers"
       - *store_artifacts
 
 
