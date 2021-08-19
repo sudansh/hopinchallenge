@@ -65,6 +65,7 @@ jobs:
     steps:
       - checkout:
           path: *workspace
+      - *login_appcenter
       - run:
           name: Push to appcenter
           command: |
