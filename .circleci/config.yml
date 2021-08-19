@@ -73,8 +73,8 @@ jobs:
           name: Build for proper environment
           command: |
             ./gradlew clean assembleRelease
-
       - *store_artifacts
+
   push_to_appcenter:
     <<: *android_config
     steps:
@@ -82,17 +82,11 @@ jobs:
           path: *workspace
       - attach_workspace:
           at: *workspace
-      #      - *git_commit_message
       - *login_appcenter
-      - run:
-          name: Detect version type, Change version and Publish
-          command: |
-            GIT_COMMIT_DESC=$(git log --format=%B -n 1 "$CIRCLE_SHA1")
-            echo $GIT_COMMIT_DESC
       - run:
           name: Push to appcenter
           command: |
-            cd app/build/outputs/apk/release
+            cd app/build/outputs/apk
             ls
             GIT_COMMIT_DESC=$(git log --format=%B -n 1 "$CIRCLE_SHA1")
             appcenter distribute release --release-notes "\"${GIT_COMMIT_DESC}\"" --app sud_test/hopin --file app/build/outputs/apk/release/app-release.apk --group "Testers"
