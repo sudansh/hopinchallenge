@@ -57,7 +57,7 @@ references:
       name: Gets commit message
       command: |
         GIT_COMMIT_DESC=$(git log --format=%B -n 1 "$CIRCLE_SHA1")
-        echo $GIT_COMMIT_DESC
+        echo 'export GIT_COMMIT_DESC="$GIT_COMMIT_DESC"' >> $BASH_ENV
 
 jobs:
   build:
@@ -65,6 +65,7 @@ jobs:
     steps:
       - checkout:
           path: *workspace
+      - *git_commit_message
       - *save_secrets
       - *restore_gradle_cache
       - *android_dependencies
@@ -80,7 +81,6 @@ jobs:
     steps:
       - attach_workspace:
           at: *workspace
-      - *git_commit_message
       - *login_appcenter
       - run:
           name: Push to appcenter
