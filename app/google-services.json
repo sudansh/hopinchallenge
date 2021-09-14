@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "216383642083",
+    "firebase_url": "https://playground-41109.firebaseio.com",
+    "project_id": "playground-41109",
+    "storage_bucket": "playground-41109.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216383642083:android:46d148d60fb95d8a8be8d6",
+        "android_client_info": {
+          "package_name": "com.sudansh.hopinchallenge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsNv1i0wLnuzjp7b1z0xImgzggWm-btHg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216383642083:android:24d7efbe9e23f4c1",
+        "android_client_info": {
+          "package_name": "com.sudansh.playground"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsNv1i0wLnuzjp7b1z0xImgzggWm-btHg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
