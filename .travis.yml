@@ -21,7 +21,7 @@ before_install:
 jobs:
   include:
   - name: Staging
-    script: bundle exec fastlane distribute
+    script: ./gradlew assembleRelease
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
