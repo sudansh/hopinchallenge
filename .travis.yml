@@ -7,7 +7,7 @@ env:
   - secure: P2lwchfMfFJvZZMX01RzGoDGaelzLm+JO0En1SJ65c6nqSeNGJlMAQW+xjtfkQsREj1ksuPPLvzKyTjl9uVmot7f2dHM04dpUiOHafRcNVpV4oezJSN638EEPGP1cKiRA1KRzosqXAQlKRqVHtwq4aXGkte0wwWP1so6PS0Ob6782NOgPOP8rNN6hNVmOn9Kwtjfwg8WOPXuFRdB3nf/j/OwiDsp8ipgHJqrl5X/JttFkSOxMfm06C9d0v7Ae6OK3cNyQ3QI2ICnvY7gyCcmV/Dc+dhGkTBFgR4wr9Tq1NdoeC6mDiLcteugq/1blc/PhFFu6N2QuY7wMjeBW+Rk0dY3XtdqgAV6/QPX6LlafqJ2Ja0X7QzXLAbyxDIVb5XfwhSFYD3uR/T9yseHnoBIKboFszxXPy9j8I1qI/Hk4bsWAXQ/5iy+I+ngkZngfN8tMvHen8ovNMRx0qXa8zPK1pEInY0c5i/kvTVHwdIz8ejAzytDjdi+Ep6iTaZXa54GsFpfhH1ePnC2a1rZGzEwAkfG5sd2zZAZhkHDSyjIRjb1nhOHcuXHKtaIFwUypcduFFi+3vdnkmsypmTw+uS6URKtPXa4MiPpF1mxpKZe8n+Y/yWTzgd+qmu4uOqP2+46R0hGkpq5wFlfGEyP6kiEFDYQk1hOasSRCxI6l0VBb3M=
 android:
   components:
-    - tools
+    - build-tools-30.0.2
     - android-30
     - platform-tools
     - extra-google-google_play_services
