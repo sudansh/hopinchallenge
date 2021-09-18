@@ -5,12 +5,6 @@ plugins {
     id "androidx.navigation.safeargs.kotlin"
 }
 
-Properties properties = new Properties()
-File secrets = file("../secrets.properties")
-if (secrets.exists()) {
-    properties.load(new FileReader(secrets))
-}
-
 android {
     signingConfigs {
         release {
