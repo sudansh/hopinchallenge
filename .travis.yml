@@ -15,9 +15,6 @@ android:
 before_install:
 - chmod +x gradlew
 - yes | sdkmanager "platforms;android-30"
-- bundle check
-- bundle install
-- bundle config set --local path 'vendor/bundle'
 jobs:
   include:
   - name: Staging
