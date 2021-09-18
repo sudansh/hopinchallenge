@@ -14,12 +14,26 @@ android:
   - extra-google-m2repository
   - extra-android-m2repository
 before_install:
-- chmod +x gradlew
-- yes | sdkmanager "platforms;android-30"
+  - mkdir -p $HOME/android-cmdline-tools
+  # Download and unzip the Android command line tools (if not already there thanks to the cache mechanism)
+  - if test ! -e $HOME/android-cmdline-tools/cmdline-tools.zip ; then curl "https://dl.google.com/android/repository/commandlinetools-linux-${COMMAND_LINE_TOOLS_VERSION}_latest.zip" > $HOME/android-cmdline-tools/cmdline-tools.zip ; fi
+  - unzip -qq -n $HOME/android-cmdline-tools/cmdline-tools.zip -d $HOME/android-cmdline-tools
+  - echo y | $HOME/android-cmdline-tools/cmdline-tools/bin/sdkmanager --sdk_root=$HOME/android-sdk "platform-tools"
+  - echo y | $HOME/android-cmdline-tools/cmdline-tools/bin/sdkmanager --sdk_root=$HOME/android-sdk "build-tools;${BUILD_TOOLS_VERSION}"
+  - echo y | $HOME/android-cmdline-tools/cmdline-tools/bin/sdkmanager --sdk_root=$HOME/android-sdk "platforms;android-${TARGET_SDK_VERSION}"
+
+  # To see if the correct values have been extracted.
+  - echo TARGET_SDK_VERSION=$TARGET_SDK_VERSION
+  - echo BUILD_TOOLS_VERSION=$BUILD_TOOLS_VERSION
+
+  # Ensure Gradle wrapper is executable
+  - chmod +x gradlew
+
 jobs:
   include:
   - name: Staging
     script: ./gradlew assembleRelease
+
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -31,6 +45,8 @@ deploy:
 
 cache:
   directories:
-  - "$HOME/.gradle/caches/"
-  - "$HOME/.gradle/wrapper/"
-  - "$HOME/.android/build-cache"
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+  - $HOME/.android/build-cache
+  - $HOME/android-cmdline-tools
+  - $HOME/android-sdk
